@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<title>Understanding AngularJS Controllers</title>
+<script type="text/javascript" 
+    src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+</head>
+<body>
+<div class="aboutme">
+  <div ng-controller="FirstController">
+    <p>Hi, I am {{name}} and my age {{age}}</p>
+    <div ng-controller="SecondController">
+       <p>Hi, I am {{name}} and my age {{age}} and my Phone Number is {{test()}}</p>
+      <div ng-controller="ThirdController">
+         <p>Hi, I am {{name}} and my age {{age}} and my Phone Number is {{test()}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+        var app = angular.module('myApp',[]);
+        app.controller('FirstController', ['$scope', function($scope) {
+            $scope.name = 'Ajay';
+            $scope.age = '25';
+            $scope.test = function(){
+                return "1234555";
+            }
+        }]);
+        app.controller('SecondController', ['$scope', function($scope) {
+           $scope.name = 'Vikash Kumar';
+           $scope.test = function(){
+                return "987654";
+            }
+        }]);
+        app.controller('ThirdController', ['$scope', function($scope) {
+            $scope.age = '32';
+        }]);
+</script>
+</body>
+</html>

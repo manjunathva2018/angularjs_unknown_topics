@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="testapp">
+
+  <head>
+    <script data-require="angular.js@1.4.0-rc.1" data-semver="1.4.0-rc.1" src="https://code.angularjs.org/1.4.0-rc.1/angular.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      div.outer {
+        border-style:solid;
+        border-width:1px;
+        padding: 8px;
+      }
+      div.inner {
+        border-style:dashed;
+        border-width:1px;
+        padding: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>AngularJS Controller Inheritance</h1>
+    <div ng-controller="ParentController" class="outer">
+      1. Primitive value on scope: <span style="font-weight:bold">{{myValue}}</span>
+      <br/>2. Object value on scope: <span style="font-weight:bold">{{myObject.value}}</span>
+      <p>
+        <div ng-controller="ChildController" class="inner">
+          3. Primitive value on scope: <span style="font-weight:bold">{{myValue}}</span>
+          <br/>4. Object value on scope: <span style="font-weight:bold">{{myObject.value}}</span>
+        </div>
+      <p>
+      5. Primitive value on scope: <span style="font-weight:bold">{{myValue}}</span>
+      <br/>6. Object value on scope: <span style="font-weight:bold">{{myObject.value}}</span>      
+    </div>
+  </body>
+<script>
+    var testapp = angular.module('testapp', []);
+
+testapp.controller('ParentController', function($scope) {
+  $scope.init = function() {
+    $scope.myValue = 'Primitive value, defined in ParentController';
+    $scope.myObject = {
+      value: "Object property value, defined in ParentController"
+    }
+  } 
+  
+  $scope.init();
+});
+
+testapp.controller('ChildController', function($scope) {
+    $scope.init = function() {
+    $scope.myValue = 'Primitive value, set in ChildController';
+    $scope.myObject.value = "Object property value, set in ChildController";
+  } 
+  
+  $scope.init();
+});
+
+
+</script>
+</html>
