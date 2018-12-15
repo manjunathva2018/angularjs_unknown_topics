@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Directives Isolated Scope</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./angular.min.js" type="text/javascript"></script>
+</head>
+<!--two way bind-->
+
+<body ng-app="myapp">
+    <div ng-controller="myCtrl">
+        <p>Second Variable 'age' is {{age}}</p>
+        <hr />
+        <p>------------------------------Directives----------------------------------</p>
+        <div my-first-directive age="age"></div>
+
+    </div>
+
+    <script>
+        var app = angular.module('myapp', []);
+
+        app.directive('myFirstDirective', function () {
+
+            return {
+                retrict: 'EA',
+                scope: {
+                    //attribute name must be same
+                    age: '='
+                },
+                template: [
+                    '<p>Value of age in directive : {{age}}</p>',
+                    '<p>Enter a new age: <input type="text" ng-model="age"/></p>'].join('')
+            }
+        });
+
+        app.controller('myCtrl', ['$scope', '$log', function (s, l) {
+
+            s.age = 25;
+        }])
+
+    </script>
+</body>
+
+</html>
